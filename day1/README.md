@@ -46,14 +46,14 @@ You're now ready for the assignments below. Run every command from inside this `
 For each assignment: run the command, then **look at what appears on screen** and answer the question — don't guess ahead of time.
 
 ### Assignment 1 — Check your setup
-Run the setup-check script:
+Run the setup-check script in your sandbox:
 ```
 ./scripts/check_installs.sh
 ```
 Read the output line by line and note which tools show green `[OK]` and which show red `[MISS]`. If anything is `[MISS]`, ask the trainer before continuing.
 
 ### Assignment 2 — Open Claude
-Start Claude Code from the terminal:
+Start Claude Code from your local terminal:
 ```
 claude
 ```
@@ -141,4 +141,34 @@ For example, turning the vague prompt from Assignment 6:
 
 Run your own improved version, read the new reply, and compare it to your very first attempt in Assignment 6. Write down one thing that improved.
 
+### Assignment 9 — Create your first custom skill
+A **skill** is a saved set of instructions Claude can reuse — instead of re-typing a long prompt every time, you save it once and trigger it with a short command.
+
+Inside Claude, ask it to build one for you:
+> Create a Claude Code skill called `daily-standup`. When I type `/daily-standup`, it should ask me three questions: what I did yesterday, what I'll do today, and any blockers I have. Gets today's date and writes the recap to standups/<YYYY-MM-DD>.md at the project root. Overwrites that day's file if the skill is run again the same day, instead of appending or asking.
+
+Read what Claude does step by step — it will likely explain what it's about to create and ask permission before writing any files. Approve it, then read where it tells you the skill was saved.
+
+Once it's done:
+1. Close Claude and reopen it (`claude`) — skills are only picked up on a fresh start. Or you can run `/reload-skills`
+2. Run `/skills` and check the count went up by one compared to Assignment 5.
+3. Run `/daily-standup` and see it trigger.
+
+### Assignment 10 — Personalize a skill for your own work
+Think of one small repetitive task from your own job — a status update format, a checklist you fill out often, a template you copy-paste. Ask Claude to turn it into a skill the same way you did in Assignment 9, describing what it should ask or do.
+
+Test it by running your new skill's command. Read the output — does it match what you asked for? If not, tell Claude what's off and let it adjust the skill, then test again.
+
+### Assignment 11 — Skill vs. plain prompt
+Do the same small task twice, in the same Claude session:
+1. Trigger it using your skill from Assignment 9 (e.g. `/daily-standup`).
+2. Ask for the same thing again, but this time typing it out as a plain prompt instead of using the skill.
+
+Fill this in:
+
+| | Skill | Plain prompt |
+|---|---|---|
+| How much did you have to type? | | |
+| Was the output consistent with what you got last time? | | |
+| Anything missing or different? | | |
 
