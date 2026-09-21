@@ -18,7 +18,7 @@ check() {
 
 check "Java"   java   -version
 check "Python" python3 --version
-check "Podman" podman --version
+check "Docker" docker --version
 check "Claude" claude --version
 check "Gradle" gradle --version
 
