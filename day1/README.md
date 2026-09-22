@@ -171,4 +171,3 @@ Fill this in:
 | How much did you have to type? | | |
 | Was the output consistent with what you got last time? | | |
 | Anything missing or different? | | |
-

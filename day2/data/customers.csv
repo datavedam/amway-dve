@@ -1,0 +1,11 @@
+customer_id,full_name,email,phone,ssn,date_of_birth,country,signup_channel,lifetime_spend
+1001,Asha Rao,asha.rao@example.com,555-0102-1,412-19-8834,1987-02-11,IN,web,1240.50
+1002,Marcus Lee,marcus.lee@example.com,555-0102-2,527-88-1123,1990-07-22,US,referral,890.00
+1003,Fatima Noor,fatima.noor@example.com,555-0102-3,398-44-2291,1985-11-03,AE,app,3410.75
+1004,Diego Alvarez,diego.alvarez@example.com,555-0102-4,601-22-9987,1993-05-19,MX,web,150.20
+1005,Wei Zhang,wei.zhang@example.com,555-0102-5,772-10-3345,1978-09-30,CN,retail,5600.00
+1006,Priya Nair,priya.nair@example.com,555-0102-6,445-91-2287,1995-01-15,IN,app,720.10
+1007,John Smith,john.smith@example.com,555-0102-7,309-67-5521,1982-03-27,US,web,2130.00
+1008,Grace Mwangi,grace.mwangi@example.com,555-0102-8,884-23-1190,1991-12-08,KE,referral,430.60
+1009,Hiro Tanaka,hiro.tanaka@example.com,555-0102-9,213-77-6642,1988-06-02,JP,app,990.40
+1010,Elena Petrova,elena.petrova@example.com,555-0103-0,556-30-8871,1992-10-25,RU,web,60.00
