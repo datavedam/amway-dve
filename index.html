@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Let's Connect on LinkedIn</title>
+<style>
+  :root {
+    --linkedin-blue: #0a66c2;
+    --bg: #f3f2ef;
+    --card-bg: #ffffff;
+    --text: #1d2226;
+    --muted: #56687a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 48px 24px;
+  }
+  header {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 40px;
+  }
+  header h1 {
+    font-size: 2rem;
+    margin-bottom: 8px;
+  }
+  header p {
+    color: var(--muted);
+    font-size: 1.05rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 28px 20px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  }
+  .card .qr {
+    width: 180px;
+    height: 180px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+  }
+  .card h2 {
+    margin: 0 0 4px;
+    font-size: 1.2rem;
+  }
+  .card .title {
+    color: var(--muted);
+    margin: 0 0 16px;
+    font-size: 0.95rem;
+  }
+  .btn {
+    display: inline-block;
+    background: var(--linkedin-blue);
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 24px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background 0.15s ease;
+  }
+  .btn:hover {
+    background: #004182;
+  }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    margin-top: 48px;
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Let's Connect on LinkedIn</h1>
+    <p>Scan a QR code below to connect with us</p>
+  </header>
+  <main class="grid">
+      <article class="card">
+        <img class="qr" src="qrcodes/datavedam-edge.png" alt="QR code linking to Datavedam Edge's LinkedIn profile" />
+        <h2>Datavedam Edge</h2>
+        <p class="title"></p>
+        <a class="btn" href="https://www.linkedin.com/company/datavedamedge/" target="_blank" rel="noopener noreferrer">Connect on LinkedIn</a>
+      </article>
+  </main>
+</body>
+</html>
