@@ -75,19 +75,32 @@ This is the core idea of the day. Each piece has one job:
 
 ---
 
-## Plan for the day (5 hours)
+## Plan for the day
 
-| Time | Block | Assignment |
-|---|---|---|
-| 0:00–0:25 | The AILC on the unshipped-quantity flow (this page) | — |
-| 0:25–1:05 | **Graph**: map what exists before you build | [`assignments/GRAPH.md`](assignments/GRAPH.md) |
-| 1:05–1:50 | **Skills**: your GI skills, public skills, and the gaps | [`install-skills.md`](install-skills.md), [`assignments/SKILLS_GAP.md`](assignments/SKILLS_GAP.md) |
-| 1:50–2:00 | Break | |
-| 2:00–2:50 | **Loops**: intake and contract as small loops with exit checks | [`assignments/LOOPS.md`](assignments/LOOPS.md) |
-| 2:50–3:35 | **Subagents**: parallel reviews and the gate reviewer | [`assignments/SUBAGENTS.md`](assignments/SUBAGENTS.md) |
-| 3:35–3:45 | Break | |
-| 3:45–4:40 | **Greenfield**: unshipped-quantity through stages 1–6 | [`assignments/GREENFIELD.md`](assignments/GREENFIELD.md) |
-| 4:40–5:00 | Show-back: three people show their evidence | — |
+**Part 1 — before lunch: plan the integration (stages 1–3)**
+
+| Block | Topic |
+|---|---|
+| 1.1 | Where we are: Day 1–2 recap, today's flow |
+| 1.2 | Why integrations need their own lifecycle |
+| 1.3 | The AILC, stage by stage |
+| 1.4 | How it's built: graph, small loops, subagents, skills, gates |
+| 1.5 | Skills: your team already started — and how to vet public ones |
+| **Lab 1** | **Plan the flow** — [`assignments/LAB1.md`](assignments/LAB1.md) → signed plan pack |
+
+**Lunch**
+
+**Part 2 — after lunch: build it and prove it (stages 4–7)**
+
+| Block | Topic |
+|---|---|
+| 2.1 | From plan to build: the agent is only as good as what you give it |
+| 2.2 | Build: your standards, and why they exist |
+| 2.3 | Test: evidence, not "done" |
+| 2.4 | Release: what DevOps needs from you |
+| 2.5 | Run: when it breaks at 3 a.m. |
+| **Lab 2** | **Greenfield: unshipped quantity** — [`assignments/LAB2.md`](assignments/LAB2.md) → signed `EVIDENCE.md` |
+| Close | Show-back and next steps |
 
 ## What you leave with
 
@@ -103,7 +116,10 @@ This is the core idea of the day. Each piece has one job:
 day3/
   README.md               this page
   install-skills.md       public skills to install (skills.sh)
-  assignments/            the hands-on sessions, in order
+  assignments/
+    LAB1.md               plan the flow (stages 1–3) — before lunch
+    LAB2.md               greenfield build and prove (stages 4–7) — after lunch
+  solutions/              reference version of the skill you write in Lab 1
   skills/                 three stage skills written for this flow (copy into .claude/skills/)
     inumber-intake/         stage 1 — brief + check_brief.py
     kafka-topic-contract/   stage 2 — topic name + producer props checks

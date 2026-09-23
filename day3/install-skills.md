@@ -124,4 +124,4 @@ If one is missing, re-run its step and read the error — don't continue on a pa
 
 No public skill exists for **webMethods, Oracle EBS staging, Amway-style Camel,
 Delinea Secret Server or ServiceNow ExceptionEvent**. Those are exactly the skills
-your team writes — see [`assignments/SKILLS_GAP.md`](assignments/SKILLS_GAP.md).
+your team writes — you build the first one (`consumer-pattern-picker`) in [`assignments/LAB1.md`](assignments/LAB1.md).
