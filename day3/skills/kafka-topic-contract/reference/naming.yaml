@@ -1,0 +1,12 @@
+# Kafka topic naming rule — DRAFT, confirm with the team.
+# Built only from two topics seen on Amway architecture diagrams.
+# Shape: <domain>_{env}_<segment>_<entity>_<pub|sub>_v<N>
+status: DRAFT — confirm with the team
+pattern: '^[a-z]+_\{env\}_[a-z0-9]+_[a-z0-9]+_(pub|sub)_v[0-9]+$'
+known_good:
+  - valuechain_{env}_000_unshippedqty_pub_v1
+  - commerce_{env}_aff_salesorder_pub_v1
+open_questions:
+  - What does the third segment mean ("000" vs "aff")? OPEN
+  - Is "sub" ever used, or only "pub"? OPEN
+  - Are error/ExceptionEvent topics named with the same rule? OPEN

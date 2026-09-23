@@ -1,0 +1,8 @@
+# Fixture only — the unshipped-quantity listener, reduced to what the check needs.
+- route:
+    id: listen-oebs-unshippedqty
+    from:
+      uri: direct:{{unshippedqty.target_route}}
+      steps:
+        - to: velocity:file:mounts/unshippedqty.vm
+        - to: sql:{{oebs.staging.insert}}?batch=true&transacted=true&dataSource=#oebsDs

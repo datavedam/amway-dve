@@ -1,0 +1,3 @@
+unshippedqty.target_route: unshippedqty-business
+unshippedqty.topic: valuechain_qa1_000_unshippedqty_pub_v1
+# oebs.staging.insert deliberately missing in qa1 — the class demo finds it

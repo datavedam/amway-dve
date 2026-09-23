@@ -1,0 +1,3 @@
+unshippedqty.target_route: unshippedqty-business
+unshippedqty.topic: valuechain_dv_000_unshippedqty_pub_v1
+oebs.staging.insert: insert into XX_UNSHIPPED_STG values (:#id)
