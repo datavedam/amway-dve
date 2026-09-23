@@ -23,17 +23,17 @@ its stdin/stdout.
 
 **Bash/zsh:**
 ```bash
-claude mcp add assignment-01-basic-stdio -- uv run --directory $PWD/assignments/01-basic-tools python server.py
+claude mcp add assignment-01-basic-stdio -- uv run --directory $PWD/assignments/mcp/01-basic-tools python server.py
 ```
 
 **PowerShell:**
 ```powershell
-claude mcp add assignment-01-basic-stdio -- uv run --directory $PWD/assignments/01-basic-tools python server.py
+claude mcp add assignment-01-basic-stdio -- uv run --directory $PWD/assignments/mcp/01-basic-tools python server.py
 ```
 
 **Command Prompt (cmd.exe):**
 ```bat
-claude mcp add assignment-01-basic-stdio -- uv run --directory %CD%/assignments/01-basic-tools python server.py
+claude mcp add assignment-01-basic-stdio -- uv run --directory %CD%/assignments/mcp/01-basic-tools python server.py
 ```
 
 ### 2. Verify it's installed
@@ -49,12 +49,12 @@ You should see `✔ Connected`.
 
 **Bash/zsh or PowerShell:**
 ```bash
-npx --yes @modelcontextprotocol/inspector uv run --directory $PWD/assignments/01-basic-tools python server.py
+npx --yes @modelcontextprotocol/inspector uv run --directory $PWD/assignments/mcp/01-basic-tools python server.py
 ```
 
 **Command Prompt (cmd.exe):**
 ```bat
-npx --yes @modelcontextprotocol/inspector uv run --directory %CD%/assignments/01-basic-tools python server.py
+npx --yes @modelcontextprotocol/inspector uv run --directory %CD%/assignments/mcp/01-basic-tools python server.py
 ```
 
 This opens a browser UI. Click **Connect**, then **List Tools** — you'll see
@@ -77,17 +77,17 @@ Run this in its own terminal (it keeps running until you stop it with `Ctrl+C`):
 
 **Bash/zsh:**
 ```bash
-MCP_TRANSPORT=streamable-http MCP_PORT=8001 uv run --directory $PWD/assignments/01-basic-tools python server.py
+MCP_TRANSPORT=streamable-http MCP_PORT=8001 uv run --directory $PWD/assignments/mcp/01-basic-tools python server.py
 ```
 
 **PowerShell:**
 ```powershell
-$env:MCP_TRANSPORT="streamable-http"; $env:MCP_PORT="8001"; uv run --directory $PWD/assignments/01-basic-tools python server.py
+$env:MCP_TRANSPORT="streamable-http"; $env:MCP_PORT="8001"; uv run --directory $PWD/assignments/mcp/01-basic-tools python server.py
 ```
 
 **Command Prompt (cmd.exe):**
 ```bat
-set MCP_TRANSPORT=streamable-http && set MCP_PORT=8001 && uv run --directory %CD%/assignments/01-basic-tools python server.py
+set MCP_TRANSPORT=streamable-http && set MCP_PORT=8001 && uv run --directory %CD%/assignments/mcp/01-basic-tools python server.py
 ```
 
 ### 2. Install
