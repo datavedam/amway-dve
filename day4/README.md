@@ -32,7 +32,7 @@ structure, never the data — and the **parity check** proves it.
 day4/
   README.md                 this page
   assignments/LAB3.md       the brownfield lab
-  lab/                      the two diagrams, the order flow, the old mapping rules,
+  lab/                      the two diagrams, the order flow, the change request, the old mapping rules,
                             the NextGen fields, and made-up sample messages
     samples/                hybris-input · nextgen-input · recorded-orderudm (S1–S6)
   skills/parity-check/      old output vs new output; structure may change, data may not

@@ -10,6 +10,7 @@
 | Consumer | I1001 → OEBS | **I1001 → OEBS — must not see any difference** |
 
 **The rule for the whole lab:** the agent may change the structure, never the data.
+The one intended change is in [`lab/change-request-i3343k.md`](../lab/change-request-i3343k.md).
 
 Work in `day4/`. Put everything you produce in `work/`. Keep `work/EVIDENCE.md` as
 you go — one row per step: what ran, the real output (pasted), who approved.
@@ -111,8 +112,9 @@ Then:
 > mounts/salesorder-to-orderudm.vm using a Velocity map; an eda-proto-producer
 > template instance for the OrderUDM topic with auto.register.schemas=false and
 > AmwaySubjectNameStrategy. Variables for dv and qa1, secrets as secret:/field:
-> bindings only. Write the mapping from lab/legacy-i3343-mapping.md and
-> lab/nextgen-salesorder-fields.md. Mark anything unknown OPEN.
+> bindings only. Write the mapping from lab/legacy-i3343-mapping.md,
+> lab/nextgen-salesorder-fields.md and lab/change-request-i3343k.md. Mark anything
+> unknown OPEN.
 
 ```
 python .claude/skills/camel-integration-author/scripts/validate_bundle.py work/i3343k
@@ -124,13 +126,16 @@ Loop until PASS.
 uv run --with airspeed --with pyyaml python .claude/skills/parity-check/scripts/parity_check.py \
   run --vm work/i3343k/mounts/salesorder-to-orderudm.vm --samples lab/samples
 ```
-Expect **FAIL** the first time. Read every line — `path: old=… new=…` — and ask Claude:
+Read every `FAIL` line — `path: old=… new=…` — and ask Claude:
 > Use the parity-check skill. For each difference, find the rule in
 > lab/legacy-i3343-mapping.md that explains the old value, fix the mapping, and
 > run parity again. Never change the samples or the recording.
 
-When only `sourceSystem` is left (`HYBRIS` → `NGC`): that is structure, not data —
-but a person decides. Copy `.claude/skills/parity-check/reference/allowed-differences.example.yaml`
+The change request says `sourceSystem` must become `NGC`, so a correct mapping
+**cannot** pass without a signature: `sourceSystem` will always differ from the
+recording (`HYBRIS` → `NGC`). **If parity passes with no allowed differences, check
+`sourceSystem` — the mapping probably kept `HYBRIS`.** Is it structure or data? A
+person decides. Copy `.claude/skills/parity-check/reference/allowed-differences.example.yaml`
 to `work/i3343k/allowed-differences.yaml`, fill in the reason, and have a principal
 put their name on it. Run again with `--allowed work/i3343k/allowed-differences.yaml`.
 

@@ -4,8 +4,12 @@
 Flags, per producer route-template instance (template-id eda-proto-producer) and per
 any key ending in auto.register.schemas:
   - auto.register.schemas present and not "false"  -> ERROR
-  - a producer with no subject.name.strategy key    -> ERROR
-  - subject.name.strategy not AmwaySubjectNameStrategy -> WARN
+  - a producer with no subject-name strategy        -> ERROR
+  - strategy not AmwaySubjectNameStrategy           -> WARN
+
+The strategy may be set as the Confluent key (value.subject.name.strategy) or as
+the eda-proto-producer template param (kafka.subjectname_strategy). The template
+hard-codes auto.register.schemas=false, so an instance need not repeat it.
 
 Usage:
   python check_props.py <application.properties>
@@ -43,14 +47,11 @@ def check(text):
     for iid, params in instances.items():
         if params.get("template-id") != "eda-proto-producer":
             continue
-        strat = [v for p, v in params.items() if p.endswith("subject.name.strategy")]
+        strat = [v for p, v in params.items() if p.endswith(("subject.name.strategy", "subjectname_strategy"))]
         if not strat:
-            errors.append(f"producer [{iid}] has no subject.name.strategy")
+            errors.append(f"producer [{iid}] has no subject-name strategy (kafka.subjectname_strategy)")
         elif strat[0] != AMWAY_STRATEGY:
             warnings.append(f"producer [{iid}] strategy {strat[0]} is not {AMWAY_STRATEGY}")
-        ars = [v for p, v in params.items() if p.endswith("auto.register.schemas")]
-        if not ars:
-            warnings.append(f"producer [{iid}] does not set auto.register.schemas=false explicitly")
     return errors, warnings
 
 
@@ -74,10 +75,14 @@ camel.route-template[pub1].kafka.auto.register.schemas=false
     e, _ = check(good.replace("schemas=false", "schemas=true"))
     assert e and "must be false" in e[0], e
     e, _ = check("camel.route-template[p].template-id=eda-proto-producer\n")
-    assert any("subject.name.strategy" in x for x in e), e
+    assert any("subject-name strategy" in x for x in e), e
     e, w = check("camel.route-template[c].template-id=eda-proto-consumer\n")
     assert not e and not w, (e, w)
-    print("selftest PASS (4 cases)")
+    tpl = f"""camel.route-template[pub2].template-id=eda-proto-producer
+camel.route-template[pub2].kafka.subjectname_strategy={AMWAY_STRATEGY}
+"""
+    assert check(tpl) == ([], []), check(tpl)
+    print("selftest PASS (5 cases)")
     return 0
 
 

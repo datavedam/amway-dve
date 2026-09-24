@@ -6,18 +6,19 @@
 Topic (from the target diagram): `commerce_prod_aff_salesorder_pub_v1` — see the
 OPEN questions about `prod` vs `pd` and `affiliate` vs `aff`.
 
-| Field | Meaning | Watch out |
+| Field | Type | Description |
 |---|---|---|
-| `order.id` | Order number, e.g. `SO-TH-100001` | |
-| `order.createdAt` | When the **cart** was created | not the order date |
-| `order.submittedAt` | When the order was **placed** (UTC) | |
-| `order.currency` | ISO currency | |
-| `affiliateCode` | Market, upper case, e.g. `TH` | |
-| `customer.id` | NextGen's **internal** customer id (a UUID) | not the ABO number |
-| `customer.aboId` | The ABO number | |
-| `promotion.code` | Voucher code | `promotion` can be missing, or `code` can be `null` |
-| `items[]` | Order lines, in order | includes **cancelled** lines |
-| `items[].sku` | Product code | |
-| `items[].qty` | Quantity (number) | |
-| `items[].price` | Unit price, string with two decimals | |
-| `items[].status` | `ACTIVE` or `CANCELLED` | Hybris never sent cancelled lines |
+| `order.id` | string | Order number, e.g. `SO-TH-100001` |
+| `order.createdAt` | timestamp (UTC) | When the cart was created |
+| `order.submittedAt` | timestamp (UTC) | When the order was placed |
+| `order.currency` | string | ISO currency code |
+| `affiliateCode` | string | Market code, upper case, e.g. `TH` |
+| `customer.id` | string (UUID) | NextGen customer record id |
+| `customer.aboId` | string | ABO number |
+| `promotion` | object, optional | Present when the order used a promotion |
+| `promotion.code` | string or null | Promotion (voucher) code |
+| `items[]` | array | Order lines, in order |
+| `items[].sku` | string | Product code |
+| `items[].qty` | number | Quantity |
+| `items[].price` | string | Unit price, two decimals |
+| `items[].status` | string | `ACTIVE` or `CANCELLED` |
