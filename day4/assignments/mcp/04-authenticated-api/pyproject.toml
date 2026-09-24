@@ -1,0 +1,12 @@
+[project]
+name = "assignment-04-authenticated-api"
+version = "0.1.0"
+description = "Assignment 4: an MCP server that requires a bearer token (streamable-http only)"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "mcp[cli]>=2.2.0",
+]
+
+[tool.uv]
+package = false

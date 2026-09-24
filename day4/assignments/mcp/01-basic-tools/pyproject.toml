@@ -1,0 +1,12 @@
+[project]
+name = "assignment-01-basic-tools"
+version = "0.1.0"
+description = "Assignment 1: basic MCP tools (echo, sum, greet)"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "mcp[cli]>=2.2.0",
+]
+
+[tool.uv]
+package = false
