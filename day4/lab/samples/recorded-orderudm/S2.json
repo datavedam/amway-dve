@@ -1,0 +1,29 @@
+{
+  "orderId": "SO-MY-200045",
+  "affiliate": "MY",
+  "distributorId": "8104455",
+  "orderDate": "2026-09-20T11:41:30Z",
+  "currency": "MYR",
+  "promotionCode": "NEWABO",
+  "sourceSystem": "HYBRIS",
+  "lines": [
+    {
+      "lineNo": 1,
+      "itemCode": "120450",
+      "quantity": 1,
+      "unitPrice": "89.90"
+    },
+    {
+      "lineNo": 2,
+      "itemCode": "120451",
+      "quantity": 3,
+      "unitPrice": "12.50"
+    },
+    {
+      "lineNo": 3,
+      "itemCode": "110001",
+      "quantity": 1,
+      "unitPrice": "450.00"
+    }
+  ]
+}

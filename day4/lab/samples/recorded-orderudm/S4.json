@@ -1,0 +1,23 @@
+{
+  "orderId": "SO-VN-300310",
+  "affiliate": "VN",
+  "distributorId": "9300310",
+  "orderDate": "2026-09-21T06:07:19Z",
+  "currency": "VND",
+  "promotionCode": "MID-SEPT",
+  "sourceSystem": "HYBRIS",
+  "lines": [
+    {
+      "lineNo": 1,
+      "itemCode": "140010",
+      "quantity": 1,
+      "unitPrice": "250000.00"
+    },
+    {
+      "lineNo": 2,
+      "itemCode": "140012",
+      "quantity": 1,
+      "unitPrice": "45000.00"
+    }
+  ]
+}

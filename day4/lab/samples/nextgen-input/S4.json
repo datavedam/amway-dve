@@ -1,0 +1,36 @@
+{
+  "order": {
+    "id": "SO-VN-300310",
+    "createdAt": "2026-09-21T06:00:00Z",
+    "submittedAt": "2026-09-21T06:07:19Z",
+    "currency": "VND"
+  },
+  "affiliateCode": "VN",
+  "customer": {
+    "id": "c1f0a2e4-0004",
+    "aboId": "9300310"
+  },
+  "items": [
+    {
+      "sku": "140010",
+      "qty": 1,
+      "price": "250000.00",
+      "status": "ACTIVE"
+    },
+    {
+      "sku": "140011",
+      "qty": 2,
+      "price": "99000.00",
+      "status": "CANCELLED"
+    },
+    {
+      "sku": "140012",
+      "qty": 1,
+      "price": "45000.00",
+      "status": "ACTIVE"
+    }
+  ],
+  "promotion": {
+    "code": "MID-SEPT"
+  }
+}

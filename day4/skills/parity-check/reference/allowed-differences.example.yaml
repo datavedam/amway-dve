@@ -1,0 +1,7 @@
+# Copy to work/i3343k/allowed-differences.yaml and fill in.
+# Every entry needs: path, reason, approved_by (a person's name — not a team, not OPEN).
+# Paths: sourceSystem, lines[*].note, meta.* ...
+allowed:
+  - path: sourceSystem
+    reason: "<why this is structure/metadata, not data — and who confirmed I1001 doesn't use it>"
+    approved_by: "<principal's name>"

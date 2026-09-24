@@ -1,0 +1,17 @@
+{
+  "orderId": "SO-MY-200046",
+  "affiliate": "MY",
+  "distributorId": "8104455",
+  "orderDate": "2026-09-22T13:31:12Z",
+  "currency": "MYR",
+  "promotionCode": "",
+  "sourceSystem": "HYBRIS",
+  "lines": [
+    {
+      "lineNo": 1,
+      "itemCode": "120450",
+      "quantity": 2,
+      "unitPrice": "89.90"
+    }
+  ]
+}

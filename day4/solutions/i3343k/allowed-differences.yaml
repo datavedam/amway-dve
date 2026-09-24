@@ -1,0 +1,6 @@
+# Differences between the old I3343 output and the new I3343K output that a
+# person has agreed are structure, not data. Anything not listed here fails parity.
+allowed:
+  - path: sourceSystem
+    reason: "Source moved from Hybris to NextGen Commerce; OrderUDM records where the order came from. Confirmed I1001 does not use this field (OPEN until confirmed with the I1001 owner)."
+    approved_by: "Training example - replace with the principal's name"
