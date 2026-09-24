@@ -38,8 +38,12 @@ mkdir -p .claude/skills .claude/agents work
 cp -r ../day3/skills/* .claude/skills/          # inumber-intake, kafka-topic-contract, env-promotion-check
 cp -r skills/parity-check .claude/skills/
 cp agents/ailc-gate-reviewer.md .claude/agents/  # this version adds stage 8
+cp lab-settings.json .claude/settings.json      # deny: reading solutions/, editing lab/samples/
 cp -r <path-to-your-gi-ai-skills>/camel-integration-author .claude/skills/
 ```
+The deny rules are the Day 2 permissions at work: the agent can't peek at the
+answers, and it can't change the recording to make parity pass.
+
 Check with `/skills`. Test the parity script once:
 ```
 uv run --with airspeed --with pyyaml python .claude/skills/parity-check/scripts/parity_check.py selftest
@@ -120,6 +124,12 @@ Then:
 python .claude/skills/camel-integration-author/scripts/validate_bundle.py work/i3343k
 ```
 Loop until PASS.
+
+**OPEN — ask your Camel owners, don't guess:** the mapping skeleton ends with `$out`,
+which Camel's Velocity prints as a Java map (`{orderId=…}`), but `eda-proto-producer`
+expects **JSON**. How do your bundles turn the map into JSON? Record the question in
+`work/i3343k/OPEN.md`. (The parity check below can't see this: it compares the data,
+not the format.)
 
 ### 6. Parity (25 min)
 ```

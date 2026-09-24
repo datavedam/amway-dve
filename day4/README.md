@@ -38,6 +38,7 @@ day4/
   skills/parity-check/      old output vs new output; structure may change, data may not
   agents/                   gate reviewer, now with stage 8 (Change) checks
   solutions/i3343k/         reference mapping + signed allowed-differences file
+  lab-settings.json         permission deny rules for the lab (copied to .claude/settings.json)
 ```
 
 > The sample messages and `lab/legacy-i3343-mapping.md` are **made-up training

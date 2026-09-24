@@ -3,7 +3,11 @@
 
 Reads keys from sources/**/*.camel.yaml and .support/application.properties.
 Looks them up in variables/<env>/{properties,configs}/*.y*ml and secrets/<env>/*.y*ml.
-Also flags secret-looking keys (password|secret|token|key) stored under variables/.
+Also flags secret-looking keys (password|secret|token|key) stored under variables/
+with a real value. A value that is only a {{reference}} (to a secret binding) is fine.
+
+Keys the platform injects (the common block: kafka.*, pvf.*, cache.*, ...) are shown
+as "platform" instead of MISSING — the same list validate_bundle.py uses.
 
 Usage:
   python check_envs.py <bundle-root>
@@ -20,6 +24,13 @@ import yaml
 ENV_ORDER = ["dv", "ts1", "ts2", "ts3", "qa1", "qa2", "perf", "pd"]
 PLACEHOLDER = re.compile(r"\{\{\s*\??([A-Za-z0-9_.\-]+)\s*\}\}")
 SECRETISH = re.compile(r"(password|secret|token|(^|[._])key($|[._]))", re.I)
+REFERENCE = re.compile(r"^\s*\{\{\s*\??[A-Za-z0-9_.\-]+\s*\}\}\s*$")
+# Same as KNOWN_PREFIXES in camel-integration-author/scripts/validate_bundle.py:
+# keys injected by the platform common block, not by the bundle.
+PLATFORM_PREFIXES = (
+    "kafka.", "pvf.", "api.jwks_", "cache.", "truststore.", "storage.",
+    "iconfig.", "camel.", "bundle.", "mount.", "resource.",
+)
 
 
 def used_keys(root):
@@ -74,13 +85,16 @@ def check(root):
                 row.append("secret")
             elif k in variables:
                 row.append("var")
+            elif k.startswith(PLATFORM_PREFIXES):
+                row.append("platform")
             else:
                 row.append("MISSING")
                 missing.append((k, env))
         matrix.append((k, row))
     for env, (variables, _) in envs.items():
         for k, (v, f) in variables.items():
-            if SECRETISH.search(k) and not (isinstance(v, dict) and "secret" in v):
+            is_ref = isinstance(v, str) and REFERENCE.match(v)
+            if SECRETISH.search(k) and not is_ref and not (isinstance(v, dict) and "secret" in v):
                 leaks.append((env, k, f))
     return keys, list(envs), matrix, missing, leaks
 
@@ -113,6 +127,8 @@ def selftest():
     assert missing == [("oebs.staging.insert", "qa1")], missing
     assert [(e, k) for e, k, _ in leaks] == [("qa1", "kafka.secret")], leaks
     assert not SECRETISH.search("kafka.bootstrap") and SECRETISH.search("api.key")
+    assert REFERENCE.match("{{i3343k.kafka.secret}}") and not REFERENCE.match("s3cr3t")
+    assert "kafka.cluster_bootstrap".startswith(PLATFORM_PREFIXES)
     print("selftest PASS (fixture: 1 missing key in qa1, 1 secret in variables)")
     return 0
 
