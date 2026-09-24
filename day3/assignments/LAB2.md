@@ -1,7 +1,7 @@
 # Day 3 — Lab 2: Greenfield — build it and prove it (stages 4–7)
 
 **Goal:** the listenOEBS bundle for the unshipped-quantity flow, built from your
-morning plan pack, with evidence for every stage and a sign-off at the end.
+Lab 1 plan pack, with evidence for every stage and a sign-off at the end.
 
 **The flow:** Manhattan → Core IMS/OMS facade →
 `valuechain_{env}_000_unshippedqty_pub_v1` → `gi-camel-oebs` (listenOEBS) →

@@ -1,8 +1,8 @@
 # Day 3 — Lab 1: Plan the flow (stages 1–3)
 
-**Goal:** by lunch you have a signed **plan pack** for the unshipped-quantity flow —
-a graph of what exists, a brief, a contract and a design decision (ADR). The
-afternoon builds from it.
+**Goal:** by the end of this lab you have a signed **plan pack** for the unshipped-quantity flow —
+a graph of what exists, a brief, a contract and a design decision (ADR).
+Lab 2 builds from it.
 
 Every step is a small loop: the agent drafts → a check runs → the agent fixes →
 the check passes → you approve. Don't move on until the step's exit check passes.
@@ -103,7 +103,7 @@ bottom of `work/adr-001.md` with name and time.
 
 ---
 
-## What you take to lunch — the plan pack
+## What you take into Lab 2 — the plan pack
 ```
 work/
   unshippedqty-brief.md    stage 1 — PASS, OPEN items listed

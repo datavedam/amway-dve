@@ -77,7 +77,7 @@ This is the core idea of the day. Each piece has one job:
 
 ## Plan for the day
 
-**Part 1 — before lunch: plan the integration (stages 1–3)**
+**Part 1 — plan the integration (stages 1–3)**
 
 | Block | Topic |
 |---|---|
@@ -88,9 +88,7 @@ This is the core idea of the day. Each piece has one job:
 | 1.5 | Skills: your team already started — and how to vet public ones |
 | **Lab 1** | **Plan the flow** — [`assignments/LAB1.md`](assignments/LAB1.md) → signed plan pack |
 
-**Lunch**
-
-**Part 2 — after lunch: build it and prove it (stages 4–7)**
+**Part 2 — build it and prove it (stages 4–7)**
 
 | Block | Topic |
 |---|---|
@@ -117,8 +115,8 @@ day3/
   README.md               this page
   install-skills.md       public skills to install (skills.sh)
   assignments/
-    LAB1.md               plan the flow (stages 1–3) — before lunch
-    LAB2.md               greenfield build and prove (stages 4–7) — after lunch
+    LAB1.md               plan the flow (stages 1–3)
+    LAB2.md               greenfield build and prove (stages 4–7)
   solutions/              reference version of the skill you write in Lab 1
   skills/                 three stage skills written for this flow (copy into .claude/skills/)
     inumber-intake/         stage 1 — brief + check_brief.py
