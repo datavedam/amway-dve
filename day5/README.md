@@ -7,16 +7,14 @@
 | 2:05–3:00 | **jev**: a model that decides instead of writing | Slides + live demo |
 
 ## Start here
+Open a terminal (Git Bash on Windows) and start Claude in the lab folder:
 ```
-cd training/repo/amway-dve
-git pull
-cd day4
-bash ../day5/setup.sh
+cd training/repo/amway-dve/day4
 claude
 ```
-Windows: use **Git Bash**. The lab runs inside `day4/`, which holds the brownfield
-material (diagrams, made-up sample orders, old mapping rules, change request,
-parity-check skill). Then follow [`LAB.md`](LAB.md) round by round.
+Then follow [`LAB.md`](LAB.md): every round is one prompt you paste into Claude —
+including the setup. The lab runs inside `day4/`, which holds the brownfield material
+(diagrams, made-up sample orders, old mapping rules, change request, parity-check skill).
 
 ## The six rounds
 | Round | Question | You produce |
