@@ -3,5 +3,5 @@
 # Paths: sourceSystem, lines[*].note, meta.* ...
 allowed:
   - path: sourceSystem
-    reason: "<why this difference is allowed (e.g. the change request requires it) and who confirmed I1001 doesn't use it>"
+    reason: "<why this difference is allowed (e.g. the change request requires it); if nobody has confirmed whether I1001 uses it, say that is OPEN>"
     approved_by: "<principal's name>"

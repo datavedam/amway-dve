@@ -106,6 +106,9 @@ pass by changing the recording).
 - *"Run this from amway-dve/day4"* → you're in the wrong folder: `cd` into `amway-dve/day4`.
 - *`uv: command not found`* → install uv (Day 1 check), open a new terminal, rerun.
 - *`/skills` doesn't list them* → you started Claude Code in another folder. Exit and run `claude` from `day4/`.
+- *"work/ has files from the Day 4 lab"* → you did the Day 4 lab in this folder, and the gate
+  would read those files too. Keep them by renaming the folder, then run setup again:
+  `mv work work-day4 && bash ../day5/setup.sh`
 
 ---
 
@@ -153,19 +156,21 @@ allows **one** difference: `sourceSystem`.
    > requires. List it as the one proposed difference, not as frozen.
 2. Check the topic names from the two diagrams:
    ```
-   python .claude/skills/kafka-topic-contract/scripts/check_topic.py 'commerce_env_affiliate_salesorder_pub_v1' 'commerce_prod_aff_salesorder_pub_v1' 'commerce_pd_aff_orderudm_pub_v1'
+   uv run --with pyyaml python .claude/skills/kafka-topic-contract/scripts/check_topic.py 'commerce_env_affiliate_salesorder_pub_v1' 'commerce_prod_aff_salesorder_pub_v1' 'commerce_pd_aff_orderudm_pub_v1'
    ```
-3. **You** (or your pair) sign the bottom of `work/frozen-contract.md`: name and time.
+3. **You** (or your pair) add a last line to `work/frozen-contract.md`: `Signed: <your name>, <time>`
 
 **You should see**
 - `frozen-contract.md` with the frozen fields (`orderId`, `affiliate`, `distributorId`,
   `orderDate`, `currency`, `promotionCode`, and the `lines` fields) and `sourceSystem`
   listed separately as the one proposed difference.
-- `check_topic` prints **FAIL** for all three names: the diagrams use real environment
-  names (`env`, `prod`, `pd`) instead of `{env}`, and `prod`/`pd` and `affiliate`/`aff`
-  disagree. These are **OPEN questions** for your Kafka owners, not errors to fix today.
+- `check_topic` prints **FAIL** for all three names, because the diagrams use concrete
+  environment names (`env`, `prod`, `pd`) instead of `{env}` — that's what the tool prints.
+  Separately, `prod`/`pd` and `affiliate`/`aff` disagree between the two diagrams. Both are
+  **OPEN questions** for your Kafka owners, not errors to fix today.
+- The command ends with FAIL on purpose: that's the finding, not a broken command.
 
-**Write in EVIDENCE.md:** `| 2 Contract | frozen-contract.md signed; check_topic 3 FAIL | <paste one FAIL line> | <name> |`
+**Write in EVIDENCE.md:** `| 2 Contract | frozen-contract.md signed; check_topic | <paste one FAIL line> | <your name> |`
 
 ---
 
@@ -190,6 +195,8 @@ You write it from the **new** field list and the change request.
 
 **Look at it yourself before round 4.** For S4, ask: how many lines did the order
 have, and how many did your mapping send? Which timestamp did it use?
+
+**Write in EVIDENCE.md:** `| 3 Mapping | render S1 and S4 | <paste the sourceSystem line from S1> | <your name> |`
 
 **If something goes wrong**
 - *"mapping did not render"* → an `#if` or `#foreach` is missing its `#end`. Ask Claude to fix the syntax only.
@@ -228,7 +235,7 @@ proof: the same six orders, the recording vs your mapping, field by field.
 | `promotionCode: old="" new=null` | NextGen can send no promotion; the old flow always sent `""` | I1001 may reject or mishandle `null` |
 | `lines.length: old=2 new=3` | NextGen sends **cancelled** lines; Hybris never did | a cancelled item gets staged in OEBS |
 
-**Write in EVIDENCE.md:** `| 4 Parity | parity on my mapping + naive draft | <paste both PARITY lines> | <name> |`
+**Write in EVIDENCE.md:** `| 4 Parity | parity on my mapping + naive draft | <paste both PARITY lines> | <your name> |`
 
 ---
 
@@ -248,8 +255,11 @@ A placeholder is not a signature.
    uv run --with airspeed --with pyyaml python .claude/skills/parity-check/scripts/parity_check.py run --vm work/salesorder-to-orderudm.vm --samples lab/samples --allowed work/allowed-differences.yaml
    ```
 3. Open `work/allowed-differences.yaml` and replace both placeholders:
-   - `reason`: why this difference is allowed — e.g. *"The change request requires NGC; Priya confirmed I1001 does not use sourceSystem."*
+   - `reason`: why this difference is allowed. Write only what you know — e.g.
+     `"The change request requires NGC. Whether I1001 uses sourceSystem is OPEN — ask the I1001 owner."`
    - `approved_by`: a real person's name.
+   - Keep both values in double quotes, as in the example: without them, a `: ` inside
+     your text breaks the YAML.
 4. Run the same command again.
 
 **You should see**
@@ -257,7 +267,7 @@ A placeholder is not a signature.
 - Step 4: `PASS S1 … PASS S6 (1 allowed difference(s))` and
   **`PARITY PASS (6/6 samples match; 6 allowed difference(s) accepted)`**.
 
-**Write in EVIDENCE.md:** `| 5 Allowed difference | parity --allowed | PARITY PASS (6/6 …) | <the approver's name> |`
+**Write in EVIDENCE.md:** `| 5 Allowed difference | parity --allowed | PARITY PASS (6/6 …) | <your name> |`
 
 **Don't:** put any other field in the allowed list to make parity pass. Only a
 difference the change request asks for, signed by a named person.
@@ -276,12 +286,16 @@ PASS / FAIL / OPEN for each item. It **never approves** — a person does.
 
 **You should see** a verdict table with:
 - **Parity: PASS** (it quotes your `PARITY PASS` line)
+- **Allowed difference: OPEN** until the I1001 owner confirms whether I1001 uses
+  `sourceSystem` — your own reason says so
 - **ADR (switchover and rollback): OPEN** and **new consumer group: OPEN** — not done today
-- anything **your own files** still list as OPEN, e.g. who confirmed I1001 doesn't use
-  `sourceSystem`, or a sign-off that should come from a principal
+- anything else **your own files** list as OPEN, e.g. the readers from round 1, the topic
+  names, or a sign-off that should come from a principal
 
 That's the reviewer doing its job: it tells you exactly what's still missing and who
 has to close it.
+
+**Write in EVIDENCE.md:** `| 6 Gate | ailc-gate-reviewer, stage 8 | <each item and its verdict, e.g. Parity PASS; ADR OPEN; …> | <your name> |`
 
 ---
 
