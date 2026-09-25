@@ -2,7 +2,7 @@
 
 | Time | Block | Material |
 |---|---|---|
-| 0:00–2:00 | **Brownfield lab, walked together**: six rounds — why (slide), do (you), what you should see (slide) | [`LAB.md`](LAB.md) |
+| 0:00–2:00 | **Brownfield lab, walked together**: six rounds - why (slide), do (you), what you should see (slide) | [`LAB.md`](LAB.md) |
 | 2:00–2:05 | Break | |
 | 2:05–3:00 | **jev**: a model that decides instead of writing | Slides + live demo |
 
@@ -12,7 +12,7 @@ Open a terminal (Git Bash on Windows) and start Claude in the lab folder:
 cd training/repo/amway-dve/day5
 claude
 ```
-Then follow [`LAB.md`](LAB.md): every round is one prompt you paste into Claude —
+Then follow [`LAB.md`](LAB.md): every round is one prompt you paste into Claude -
 including the setup. Everything for the lab is in this folder.
 
 ## The six rounds
@@ -30,7 +30,7 @@ including the setup. Everything for the lab is in this folder.
 ```
 day5/
   README.md            this page
-  LAB.md               the lab — one Claude prompt per round
+  LAB.md               the lab - one Claude prompt per round
   setup.sh             setup (Claude runs it for you in Round 0)
   lab/                 diagrams, order flow, change request, old + new field rules,
                        made-up sample orders (lab/samples/)
