@@ -2,7 +2,8 @@
   "permissions": {
     "deny": [
       "Read(./solutions/**)",
-      "Edit(./lab/samples/**)"
+      "Edit(./lab/samples/**)",
+      "Read(./lab/samples/generate.py)"
     ]
   }
 }

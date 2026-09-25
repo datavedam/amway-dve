@@ -57,10 +57,27 @@ def diff(old, new, path=""):
         yield path, old, new
 
 
-def is_placeholder(text):
-    """True for template text: <...>, or the words TBD / TODO / replace / placeholder."""
+PLACEHOLDER_WORDS = r"(open|tbd|tbc|todo|placeholder)"          # the value is, or starts with, one of these words
+NOT_A_PERSON = r"((the\s+)?(gi\s+)?team|n/?a|none|nobody|-+)"   # a team or "n/a" is not a named approver
+
+
+def is_placeholder(text, person=False):
+    """True for template text. Judges the whole (trimmed) value, never a substring, so
+    "Priya Nair <priya.nair@amway.com>", "Kenji Todo" or a reason that mentions
+    "replace" are real text. Placeholders: empty; wrapped in <...>; OPEN / TBD / TBC /
+    TODO / placeholder (whole value or first word); starting with "replace". For a
+    person (approved_by), also a team or n/a ("team", "GI team", "n/a"), whole value
+    or first words."""
     import re
-    return "<" in text or ">" in text or bool(re.search(r"\b(tbd|todo|replace|placeholder)\b", text, re.I))
+    t = str(text or "").strip()
+    if not t or (t.startswith("<") and t.endswith(">")):
+        return True
+    if re.match(PLACEHOLDER_WORDS + r"\b", t, re.I) or re.match(r"replace", t, re.I):
+        return True
+    return person and bool(re.match(NOT_A_PERSON + r"(\b|$)", t, re.I))
+
+
+MIN_REASON = 15
 
 
 def check_entries(entries):
@@ -68,10 +85,11 @@ def check_entries(entries):
     for e in entries:
         who = str(e.get("approved_by") or "").strip()
         why = str(e.get("reason") or "").strip()
-        if (not e.get("path") or not why or not who or who.upper() == "OPEN"
-                or is_placeholder(who) or is_placeholder(why)):
-            errors.append(f"allowed difference {e.get('path')!r} needs path, a real reason and a named "
-                          "approved_by (not empty, not OPEN, not a placeholder like <...>, TBD or 'replace')")
+        if (not e.get("path") or is_placeholder(why) or len(why) < MIN_REASON
+                or is_placeholder(who, person=True)):
+            errors.append(f"allowed difference {e.get('path')!r} needs path, a real reason (at least "
+                          f"{MIN_REASON} characters) and a named person as approved_by (not empty, not OPEN, "
+                          "not a team, not a placeholder like <...> or TBD)")
         else:
             allowed.append(e["path"])
     return allowed, errors
@@ -154,10 +172,27 @@ def selftest():
         print("selftest FAIL: [*] matching")
         return 1
     signed = {"path": "sourceSystem", "reason": "Change request asks for it", "approved_by": "Anita Rao"}
+    if check_entries([signed])[1] != []:
+        print("selftest FAIL: sign-off rules rejected a signed entry")
+        return 1
     for bad in ({"approved_by": "<principal's name>"}, {"approved_by": "OPEN"}, {"approved_by": ""},
-                {"approved_by": "Training example - replace with a name"}, {"reason": "TBD"}):
-        if check_entries([{**signed, **bad}])[1] == [] or check_entries([signed])[1] != []:
+                {"approved_by": "TBD"}, {"approved_by": "tbc"}, {"approved_by": "Replace with a name"},
+                {"approved_by": "team"}, {"approved_by": "GI team"}, {"approved_by": "the GI Team"},
+                {"approved_by": "n/a"}, {"approved_by": "TODO: ask the principal"},
+                {"reason": "TBD"}, {"reason": ""}, {"reason": "OPEN"}, {"reason": "because"},
+                {"reason": "<why this difference is allowed>"}, {"reason": "replace with the reason"},
+                {"path": ""}):
+        if check_entries([{**signed, **bad}])[1] == []:
             print(f"selftest FAIL: sign-off rules accepted {bad}")
+            return 1
+    for good in ({"reason": "HYBRIS -> NGC per the change request"},
+                 {"reason": "NextGen will replace Hybris; the change request requires NGC."},
+                 {"reason": "The change request requires NGC. Whether I1001 uses sourceSystem is OPEN "
+                            "\u2014 ask the I1001 owner."},
+                 {"approved_by": "Priya Nair <priya.nair@amway.com>"}, {"approved_by": "Kenji Todo"},
+                 {"approved_by": "Anita Rao (training)"}):
+        if check_entries([{**signed, **good}])[1] != []:
+            print(f"selftest FAIL: sign-off rules rejected {good}")
             return 1
     try:
         tpl = '#set($o = {})#set($i = $o.put("x", $body.v))#set($l = [])' \

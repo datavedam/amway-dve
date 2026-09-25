@@ -81,9 +81,9 @@ Each difference prints as `path: old=… new=…` — `old` is what I1001 gets t
 ## Round 0 — Set up (0:00–0:10)
 
 **What this is about:** get the lab tools into your project: the skills, the gate
-reviewer, and two **deny rules** (the Day 2 permissions): Claude may not read
-`solutions/` (the answers), and may not edit `lab/samples/` (you can't make parity
-pass by changing the recording).
+reviewer, and **deny rules** (the Day 2 permissions): Claude may not read
+`solutions/` or `lab/samples/generate.py` (both give the answers away), and may not
+edit `lab/samples/` (you can't make parity pass by changing the recording).
 
 **Do this**
 1. Open a terminal (Git Bash on Windows).
@@ -153,12 +153,14 @@ allows **one** difference: `sourceSystem`.
    > lab/change-request-i3343k.md. Write work/frozen-contract.md: every OrderUDM field
    > I1001 receives, its type and an example value — the fields that must not change.
    > sourceSystem is the exception: it changes from HYBRIS to NGC, as the change request
-   > requires. List it as the one proposed difference, not as frozen.
+   > requires. List it as the one proposed difference, not as frozen. End the file with
+   > an empty line `Signed:` for a person to fill in; don't write a sign-off status yourself.
 2. Check the topic names from the two diagrams:
    ```
    uv run --with pyyaml python .claude/skills/kafka-topic-contract/scripts/check_topic.py 'commerce_env_affiliate_salesorder_pub_v1' 'commerce_prod_aff_salesorder_pub_v1' 'commerce_pd_aff_orderudm_pub_v1'
    ```
-3. **You** (or your pair) add a last line to `work/frozen-contract.md`: `Signed: <your name>, <time>`
+3. **You** (or your pair) fill in the last line of `work/frozen-contract.md` with your name
+   and the time: `Signed: <your name>, <time>`
 
 **You should see**
 - `frozen-contract.md` with the frozen fields (`orderId`, `affiliate`, `distributorId`,
@@ -289,8 +291,9 @@ PASS / FAIL / OPEN for each item. It **never approves** — a person does.
 - **Allowed difference: OPEN** until the I1001 owner confirms whether I1001 uses
   `sourceSystem` — your own reason says so
 - **ADR (switchover and rollback): OPEN** and **new consumer group: OPEN** — not done today
-- anything else **your own files** list as OPEN, e.g. the readers from round 1, the topic
-  names, or a sign-off that should come from a principal
+- **Impact list** and **Frozen contract: PASS or OPEN**
+- a **Notes** list of other gaps the reviewer noticed (e.g. the topic names or key, owner
+  names) — that's fine: they're questions for your real change
 
 That's the reviewer doing its job: it tells you exactly what's still missing and who
 has to close it.
