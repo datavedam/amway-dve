@@ -61,8 +61,9 @@ group**: so it can't disturb any existing reader.
 ## 3. Write the mapping (18 min)
 The starter `work/salesorder-to-orderudm.vm` already maps `orderId`, `affiliate` and
 `currency` in your team's map style. Write the rest from the **new** field list and the
-change request, the way a first draft usually gets written. The old mapping rules are
-what parity holds you to — you'll meet them in step 4. Ask Claude:
+change request. The old mapping rules are what parity holds you to. The parity-check
+skill may read them for you, so your first parity run will likely show only
+`sourceSystem` — then run the naive draft in step 4 to see what parity catches. Ask Claude:
 > Use the parity-check skill. Finish work/salesorder-to-orderudm.vm from
 > lab/nextgen-salesorder-fields.md and lab/change-request-i3343k.md. Keep the
 > Velocity map style. Don't run parity yet.
