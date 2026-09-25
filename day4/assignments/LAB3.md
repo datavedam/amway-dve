@@ -64,9 +64,10 @@ Then ask Claude:
 > OrderUDM output, each with where you found it. Anything the material doesn't
 > confirm is OPEN.
 
-**Exit:** `work/impact.md` exists. **Observe:** GWMS, BlueYonder and the data team
-read the same salesorder events. That is why I3343K must use a **new consumer group**
-and never touch the existing ones.
+**Exit:** `work/impact.md` exists. **Observe:** only **I3343** is confirmed as a reader
+of the salesorder topic. GWMS (receives the order over REST), BlueYonder (fulfilment
+events) and the data team are **OPEN** — the material doesn't say whether they read it.
+Either way, I3343K gets its own **new consumer group** and never touches the existing ones.
 
 ### 2. Change brief (10 min)
 > Use the inumber-intake skill. Write the brief for the change "I3343 → I3343K,

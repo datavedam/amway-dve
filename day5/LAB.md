@@ -50,11 +50,11 @@ group**: so it can't disturb any existing reader.
 (The facilitator's graph from hour 1 is on screen — building your own takes ~5 minutes, skip it today.)
 
 ## 2. Freeze the contract (7 min)
-> Read lab/legacy-i3343-mapping.md and lab/samples/recorded-orderudm/. Write
-> work/frozen-contract.md: every OrderUDM field I1001 receives, its type and an
-> example value — the fields that must not change. sourceSystem is the exception:
-> it changes from HYBRIS to NGC, as lab/change-request-i3343k.md requires. List it
-> as the one proposed difference, not as frozen.
+> Read lab/samples/recorded-orderudm/ (what I1001 actually receives today) and
+> lab/change-request-i3343k.md. Write work/frozen-contract.md: every OrderUDM field
+> I1001 receives, its type and an example value — the fields that must not change.
+> sourceSystem is the exception: it changes from HYBRIS to NGC, as the change request
+> requires. List it as the one proposed difference, not as frozen.
 
 **Exit:** a lead (or your pair) signs the bottom of `frozen-contract.md`.
 
@@ -82,8 +82,9 @@ Read every `FAIL` line — `path: old=… new=…`. Then:
 > For each difference, find the rule in lab/legacy-i3343-mapping.md that explains the
 > old value, fix the mapping, and run parity again. Never change the samples or the recording.
 
-If your first run already shows only `sourceSystem`, run parity once on the
-facilitator's first draft to see what it would have caught (you'll need it for show-back):
+If your first run shows only `sourceSystem`, your mapping was right first time —
+that's a fine result, and parity is what proves it. Then run parity once on the
+facilitator's naive first draft to see what parity catches (you'll need it for show-back):
 ```
 uv run --with airspeed --with pyyaml python .claude/skills/parity-check/scripts/parity_check.py \
   run --vm ../day5/demo/naive-draft.vm --samples lab/samples
@@ -104,7 +105,9 @@ Fill in the reason and a real name, then run again with
 > contract and parity. The ADR and the new consumer group are not part of today's
 > lab: report them OPEN.
 
-It will mark the ADR and the new consumer group OPEN — you didn't do those today.
+It will mark the ADR and the new consumer group OPEN — you didn't do those today —
+and anything your own files still list as OPEN, such as who confirmed I1001 doesn't
+use sourceSystem, or a sign-off that needs a principal.
 That's correct: it reports, it doesn't approve.
 
 ---

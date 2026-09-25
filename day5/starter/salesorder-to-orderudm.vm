@@ -1,7 +1,7 @@
 ## I3343K mapping: NextGen Commerce salesorder -> OrderUDM.   STARTER (Day 5 quick lab)
 ## Your team's map style: build $out with put(), then emit $out.
 ## Write it from: lab/nextgen-salesorder-fields.md (new source) + lab/change-request-i3343k.md
-##        (the one intended change). Parity then holds you to the old rules (lab/legacy-i3343-mapping.md).
+##        (the one intended change). The old I3343 rules are what parity holds you to.
 ## The first three fields are done. Finish the rest, then run parity.
 #set($out = {})
 #set($ignore = $out.put("orderId",   $body.order.id))
