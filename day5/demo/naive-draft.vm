@@ -1,0 +1,21 @@
+## Day 5 live demo: a FIRST DRAFT that looks right and is wrong in four places.
+## Used by the facilitator on the parity demo slides. Not a solution.
+#set($out = {})
+#set($ignore = $out.put("orderId",       $body.order.id))
+#set($ignore = $out.put("affiliate",     $body.affiliateCode))
+#set($ignore = $out.put("distributorId", $body.customer.id))
+#set($ignore = $out.put("orderDate",     $body.order.createdAt))
+#set($ignore = $out.put("currency",      $body.order.currency))
+#set($ignore = $out.put("promotionCode", $body.promotion.code))
+#set($ignore = $out.put("sourceSystem",  "NGC"))
+#set($lines = [])
+#foreach($item in $body.items)
+#set($line = {})
+#set($ignore = $line.put("lineNo",    $foreach.count))
+#set($ignore = $line.put("itemCode",  $item.sku))
+#set($ignore = $line.put("quantity",  $item.qty))
+#set($ignore = $line.put("unitPrice", $item.price))
+#set($ignore = $lines.add($line))
+#end
+#set($ignore = $out.put("lines", $lines))
+$out

@@ -1,0 +1,15 @@
+## I3343K mapping: NextGen Commerce salesorder -> OrderUDM.   STARTER (Day 5 quick lab)
+## Your team's map style: build $out with put(), then emit $out.
+## Rules: lab/legacy-i3343-mapping.md (old flow) + lab/nextgen-salesorder-fields.md (new source)
+##        + lab/change-request-i3343k.md (the one intended change).
+## The first three fields are done. Finish the rest, then run parity.
+#set($out = {})
+#set($ignore = $out.put("orderId",   $body.order.id))
+#set($ignore = $out.put("affiliate", $body.affiliateCode))
+#set($ignore = $out.put("currency",  $body.order.currency))
+## TODO distributorId
+## TODO orderDate
+## TODO promotionCode
+## TODO sourceSystem
+## TODO lines[]  (lineNo, itemCode, quantity, unitPrice)
+$out
