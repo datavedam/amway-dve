@@ -63,7 +63,7 @@ NOT_A_PERSON = r"((the\s+)?(gi\s+)?team|n/?a|none|nobody|-+)"   # a team or "n/a
 
 def is_placeholder(text, person=False):
     """True for template text. Judges the whole (trimmed) value, never a substring, so
-    "Priya Nair <priya.nair@amway.com>", "Kenji Todo" or a reason that mentions
+    "Example Approver <approver@example.com>", "Example Todorov (test)" or a reason that mentions
     "replace" are real text. Placeholders: empty; wrapped in <...>; OPEN / TBD / TBC /
     TODO / placeholder (whole value or first word); starting with "replace". For a
     person (approved_by), also a team or n/a ("team", "GI team", "n/a"), whole value
@@ -171,7 +171,7 @@ def selftest():
     if not is_allowed("lines[3].note", ["lines[*].note"]):
         print("selftest FAIL: [*] matching")
         return 1
-    signed = {"path": "sourceSystem", "reason": "Change request asks for it", "approved_by": "Anita Rao"}
+    signed = {"path": "sourceSystem", "reason": "Change request asks for it", "approved_by": "Example Approver"}
     if check_entries([signed])[1] != []:
         print("selftest FAIL: sign-off rules rejected a signed entry")
         return 1
@@ -189,8 +189,8 @@ def selftest():
                  {"reason": "NextGen will replace Hybris; the change request requires NGC."},
                  {"reason": "The change request requires NGC. Whether I1001 uses sourceSystem is OPEN "
                             "\u2014 ask the I1001 owner."},
-                 {"approved_by": "Priya Nair <priya.nair@amway.com>"}, {"approved_by": "Kenji Todo"},
-                 {"approved_by": "Anita Rao (training)"}):
+                 {"approved_by": "Example Approver <approver@example.com>"}, {"approved_by": "Example Todorov (test)"},
+                 {"approved_by": "Example Approver (training)"}):
         if check_entries([{**signed, **good}])[1] != []:
             print(f"selftest FAIL: sign-off rules rejected {good}")
             return 1

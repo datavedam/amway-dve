@@ -4,4 +4,4 @@
 allowed:
   - path: sourceSystem
     reason: "Source moved from Hybris to NextGen Commerce; OrderUDM records where the order came from. Confirmed I1001 does not use this field (OPEN until confirmed with the I1001 owner)."
-    approved_by: "Anita Rao (training)"
+    approved_by: "Example Approver (training)"
