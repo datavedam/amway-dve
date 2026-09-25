@@ -2,7 +2,7 @@
 
 **The aim:** move the salesorder flow from Hybris to NextGen, and have Claude **prove**
 that I1001 receives exactly the same data as before - only `sourceSystem` changes, and
-a person signs off on that one difference.
+that one difference is written down as intended.
 
 Everything happens **inside Claude**. You paste one prompt per round; Claude reads the
 files, writes the outputs and runs the checks.
@@ -28,7 +28,7 @@ Everything is in this `day5/` folder. You never run these by hand - Claude does.
 | `demo/naive-draft.vm` | A first draft that looks right and is wrong in four places (Round 4) |
 | `skills/parity-check` (`parity_check.py`) | The parity check: runs a mapping on the six orders and compares every field with the recording; `render` shows one order's output |
 | `skills/kafka-topic-contract` (`check_topic.py`) | Checks Kafka topic names against the team's naming rule (Round 2) |
-| `skills/parity-check/reference/allowed-differences.example.yaml` | Template for signing an allowed difference: field, reason, approver (Round 5) |
+| `skills/parity-check/reference/allowed-differences.example.yaml` | Template for the allowed difference: field, reason, who accepted it (Round 5) |
 | `agents/ailc-gate-reviewer.md` | The gate reviewer subagent: read-only, checks the evidence, reports PASS / FAIL / OPEN, never approves (Round 6) |
 | `lab-settings.json` | Deny rules: Claude can't read `solutions/` or `lab/samples/generate.py`, or edit `lab/samples/` |
 | `work/adr-switchover.md` | Your switchover decision (Round 2b): options, recommendation, consumer group, rollback |
@@ -75,14 +75,11 @@ and never disturbs an existing reader.
 > lab/change-request-i3343k.md. Write work/frozen-contract.md: every OrderUDM field
 > I1001 receives, its type and an example value - the fields that must not change.
 > sourceSystem is the exception: it changes from HYBRIS to NGC, as the change request
-> requires. List it as the one proposed difference, not as frozen. End the file with an
-> empty line "Signed:" for a person to fill in. Then run the kafka-topic-contract
+> requires. List it as the one proposed difference, not as frozen. Then run the kafka-topic-contract
 > check on the three topic names in the change request and explain the result. Add a
 > row to work/EVIDENCE.md.
 
 *Claude runs `check_topic.py` (kafka-topic-contract skill): checks the topic names against the naming rule.*
-
-Then **you** fill in the `Signed:` line with your name and the time. Don't skip it: the gate in Round 6 marks an unsigned contract as FAIL.
 
 **You should see:** the frozen fields, with `sourceSystem` listed separately. The topic
 check **FAILs** all three names on purpose: the diagrams use real environment names
@@ -96,11 +93,8 @@ your Kafka owners.
 > time. Recommend one. Cover: I3343K's new consumer group and where it starts reading
 > (latest vs an agreed offset), what happens to orders in flight during the switch, and
 > the rollback (I1001 goes back to the old path; the old consumer group was never
-> touched). Mark anything the lab material doesn't tell you as OPEN. End with an empty
-> line "Decided by:" for a person to fill in. Add a row to work/EVIDENCE.md.
-
-Then **you** fill in the `Decided by:` line with your name. The agent recommends; a
-person decides.
+> touched). Mark anything the lab material doesn't tell you as OPEN. Add a row to
+> work/EVIDENCE.md.
 
 **You should see:** three options compared, one recommended (usually *run side by side
 and compare*), the new consumer group and its start point, in-flight orders, and the
@@ -139,7 +133,7 @@ It looks right - but looking right isn't proof.
 | `promotionCode` | `null` instead of `""` | I1001 may reject it |
 | `lines` 2 → 3 | cancelled lines were sent | a cancelled item gets staged in OEBS |
 
-## Round 5 - A person signs the one difference
+## Round 5 - Accept the one intended difference
 > Create work/allowed-differences.yaml from
 > .claude/skills/parity-check/reference/allowed-differences.example.yaml for
 > sourceSystem, with reason "The change request requires NGC. Whether I1001 uses
@@ -149,11 +143,11 @@ It looks right - but looking right isn't proof.
 
 (Replace `<your name>` with your real name before you send it.)
 
-*`allowed-differences.yaml` lists the differences a person has signed off: field, reason, approver. `parity_check.py run --allowed` accepts only those, and rejects placeholders.*
+*`allowed-differences.yaml` lists the differences that are intended: field, reason, who accepted it. `parity_check.py run --allowed` accepts only those, and rejects placeholders.*
 
 **You should see:** **`PARITY PASS (6/6 samples match; 6 allowed difference(s) accepted)`**.
-**What it means:** the agent can't decide a data change is OK - a named person does.
-A placeholder or no name makes it fail.
+**What it means:** the only difference allowed is the one the change request asks for,
+written down with a reason and your name. A placeholder or no name makes it fail.
 
 ## Round 6 - The gate
 > Use the ailc-gate-reviewer subagent on work/ for stage 8: impact list, frozen
@@ -163,21 +157,20 @@ A placeholder or no name makes it fail.
 *`ailc-gate-reviewer` is a read-only subagent: it checks your `work/` files and reports PASS / FAIL / OPEN for each item.*
 
 **You should see:** Parity **PASS**; the allowed difference **OPEN** (until the I1001
-owner confirms); the switchover ADR **PASS** if it's signed (**FAIL** if `Decided by:` is
-empty); the new consumer group **OPEN** (its name and start point are still to be
+owner confirms); the switchover ADR **PASS** (options, recommendation, rollback); the new consumer group **OPEN** (its name and start point are still to be
 agreed); impact list and frozen contract PASS or OPEN;
 plus a Notes list of other gaps. The reviewer reports - it never approves.
 
 ---
 
 ## What you leave with
-Your `work/` folder: the impact list, the signed frozen contract, the signed switchover ADR, the new mapping,
-**parity PASS 6/6 with one signed difference**, and the gate's verdict with its OPEN
+Your `work/` folder: the impact list, the frozen contract, the switchover ADR, the new mapping,
+**parity PASS 6/6 with the one intended difference**, and the gate's verdict with its OPEN
 list - proof that I1001 won't notice, and exactly what's still open and who closes it.
 
 **The method, for any change to a running flow** (this one, or a webMethods → Camel
 move): find who depends on it → freeze what they receive → decide how to switch → build the
-change → prove it with parity → a person signs each intended difference.
+change → prove it with parity → accept only the differences the change asks for.
 
 ## Show-back
 1. Which difference would you have missed without parity (yours, or the naive draft's)?

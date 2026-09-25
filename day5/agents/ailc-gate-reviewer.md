@@ -20,18 +20,18 @@ Rules:
       each with where it was found; readers the material doesn't confirm are marked OPEN
       (that is correct, not a failure).
     - Frozen contract: a file lists the output fields the consumer relies on (field,
-      type, example) and ends with a `Signed:` line carrying a person's name.
+      type, example), with the one proposed difference listed separately.
     - Parity: PASS if `parity-check/scripts/parity_check.py run ... --allowed <file>`
       prints `PARITY PASS`. Run it yourself and quote that line.
     - Allowed difference: each entry has a reason and a named approver (a person).
       OPEN if the reason itself says a fact is unconfirmed (e.g. "is OPEN — ask the
       I1001 owner"). FAIL only if the reason or approver is a placeholder or missing,
       or the difference is not one the change request asks for.
-    - ADR: names the switchover option and the rollback.
+    - ADR: compares the switchover options, recommends one, and covers the rollback.
     - New consumer group: the new flow uses a NEW consumer group; the old flow's group
       and the old flow itself are untouched.
-- Verdicts: FAIL only when a check script fails or a required artifact is missing or
-  unsigned. Anything that needs confirmation from someone outside the team is OPEN.
+- Verdicts: FAIL only when a check script fails or a required artifact is missing.
+  Do not require signature or sign-off lines in the files. Anything that needs confirmation from someone outside the team is OPEN.
   Judge only the listed items; put any other observations (e.g. topic/key, owner
   names) under a separate Notes list, not as verdicts.
 - Quote the actual command and its output. No output, no verdict.

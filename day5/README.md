@@ -20,11 +20,11 @@ including the setup. Everything for the lab is in this folder.
 |---|---|---|
 | 0 | Set up | skills, deny rules, starter mapping, `EVIDENCE.md` |
 | 1 | Who gets hit? | `work/impact.md` |
-| 2 | What must not change? | `work/frozen-contract.md` (signed) + topic-name check |
-| 2b | How do we switch over? | `work/adr-switchover.md` (signed) |
+| 2 | What must not change? | `work/frozen-contract.md` + topic-name check |
+| 2b | How do we switch over? | `work/adr-switchover.md` |
 | 3 | Write the new mapping | `work/salesorder-to-orderudm.vm` |
 | 4 | Prove it: parity | parity on your mapping + on the naive draft |
-| 5 | The one allowed difference | `work/allowed-differences.yaml` (signed) → `PARITY PASS` |
+| 5 | The one allowed difference | `work/allowed-differences.yaml` → `PARITY PASS` |
 | 6 | The gate | the reviewer's verdict table |
 
 ## What's in this folder
