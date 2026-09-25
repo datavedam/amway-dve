@@ -7,8 +7,8 @@ a person signs off on that one difference.
 Everything happens **inside Claude**. You paste one prompt per round; Claude reads the
 files, writes the outputs and runs the checks.
 
-> Everything in `lab/` is **made-up training data** shaped like your flow
-> (orders, old mapping rules, change request) - not real Amway data.
+**Note:** everything in `lab/` is **made-up training data** shaped like your flow
+(orders, old mapping rules, change request) - not real Amway data.
 
 ## Files and scripts this lab uses
 Everything is in this `day5/` folder. You never run these by hand - Claude does.
@@ -81,7 +81,7 @@ and never disturbs an existing reader.
 
 *Claude runs `check_topic.py` (kafka-topic-contract skill): checks the topic names against the naming rule.*
 
-Then **you** fill in the `Signed:` line with your name and the time.
+Then **you** fill in the `Signed:` line with your name and the time. Don't skip it: the gate in Round 6 marks an unsigned contract as FAIL.
 
 **You should see:** the frozen fields, with `sourceSystem` listed separately. The topic
 check **FAILs** all three names on purpose: the diagrams use real environment names
