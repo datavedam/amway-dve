@@ -1,5 +1,5 @@
-# Copy to work/i3343k/allowed-differences.yaml and fill in.
-# Every entry needs: path, reason, approved_by (a person's name — not a team, not OPEN).
+# Copy next to your mapping (Day 5 lab: work/allowed-differences.yaml; Day 4 lab: work/i3343k/allowed-differences.yaml) and fill in.
+# Every entry needs: path, reason, approved_by (a person's name — not a team, not OPEN, not a <placeholder>).
 # Paths: sourceSystem, lines[*].note, meta.* ...
 allowed:
   - path: sourceSystem

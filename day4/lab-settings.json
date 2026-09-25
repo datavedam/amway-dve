@@ -2,8 +2,7 @@
   "permissions": {
     "deny": [
       "Read(./solutions/**)",
-      "Edit(./lab/samples/**)",
-      "Write(./lab/samples/**)"
+      "Edit(./lab/samples/**)"
     ]
   }
 }

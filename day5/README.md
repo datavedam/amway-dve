@@ -4,7 +4,8 @@
 |---|---|---|
 | 0:00–1:00 | **Brownfield**: change what's already running — theory with live demos | Slides |
 | 1:00–2:00 | **Quick lab**: prove I1001 won't notice | [`LAB.md`](LAB.md) |
-| 2:00–3:00 | **jev**: a model that decides instead of writing | Slides + live demo |
+| 2:00–2:05 | Break | |
+| 2:05–3:00 | **jev**: a model that decides instead of writing | Slides + live demo |
 
 ## Setup
 ```

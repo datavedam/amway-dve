@@ -57,19 +57,32 @@ def diff(old, new, path=""):
         yield path, old, new
 
 
+def is_placeholder(text):
+    """True for template text: <...>, or the words TBD / TODO / replace / placeholder."""
+    import re
+    return "<" in text or ">" in text or bool(re.search(r"\b(tbd|todo|replace|placeholder)\b", text, re.I))
+
+
+def check_entries(entries):
+    allowed, errors = [], []
+    for e in entries:
+        who = str(e.get("approved_by") or "").strip()
+        why = str(e.get("reason") or "").strip()
+        if (not e.get("path") or not why or not who or who.upper() == "OPEN"
+                or is_placeholder(who) or is_placeholder(why)):
+            errors.append(f"allowed difference {e.get('path')!r} needs path, a real reason and a named "
+                          "approved_by (not empty, not OPEN, not a placeholder like <...>, TBD or 'replace')")
+        else:
+            allowed.append(e["path"])
+    return allowed, errors
+
+
 def load_allowed(path):
     if not path:
         return [], []
     import yaml
     doc = yaml.safe_load(Path(path).read_text()) or {}
-    allowed, errors = [], []
-    for e in doc.get("allowed", []):
-        who = str(e.get("approved_by") or "").strip()
-        if not e.get("path") or not e.get("reason") or not who or who.upper() == "OPEN":
-            errors.append(f"allowed difference {e.get('path')!r} needs path, reason and a named approved_by")
-        else:
-            allowed.append(e["path"])
-    return allowed, errors
+    return check_entries(doc.get("allowed", []))
 
 
 def is_allowed(p, allowed):
@@ -140,14 +153,20 @@ def selftest():
     if not is_allowed("lines[3].note", ["lines[*].note"]):
         print("selftest FAIL: [*] matching")
         return 1
+    signed = {"path": "sourceSystem", "reason": "Change request asks for it", "approved_by": "Anita Rao"}
+    for bad in ({"approved_by": "<principal's name>"}, {"approved_by": "OPEN"}, {"approved_by": ""},
+                {"approved_by": "Training example - replace with a name"}, {"reason": "TBD"}):
+        if check_entries([{**signed, **bad}])[1] == [] or check_entries([signed])[1] != []:
+            print(f"selftest FAIL: sign-off rules accepted {bad}")
+            return 1
     try:
         tpl = '#set($o = {})#set($i = $o.put("x", $body.v))#set($l = [])' \
               '#foreach($e in $body.e)#set($i = $l.add($foreach.count))#end#set($i = $o.put("l", $l))$o'
         assert render(tpl, {"v": "k", "e": ["p", "q"]}) == {"x": "k", "l": [1, 2]}
     except ImportError:
-        print("selftest PASS (diff rules; Velocity rendering skipped: airspeed not installed)")
+        print("selftest PASS (diff rules, sign-off rules; Velocity rendering skipped: airspeed not installed)")
         return 0
-    print("selftest PASS (diff rules, allowed paths, Velocity rendering)")
+    print("selftest PASS (diff rules, allowed paths, sign-off rules, Velocity rendering)")
     return 0
 
 

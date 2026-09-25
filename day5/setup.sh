@@ -10,8 +10,9 @@ command cp -rf skills/parity-check .claude/skills/
 command cp -f agents/ailc-gate-reviewer.md .claude/agents/
 command cp -f lab-settings.json .claude/settings.json
 [ -f work/salesorder-to-orderudm.vm ] || command cp ../day5/starter/salesorder-to-orderudm.vm work/
+[ -f work/EVIDENCE.md ] || printf '%s\n' '# Evidence' '' '| Step | Check run | Output (pasted) | Approved by |' '|---|---|---|---|' > work/EVIDENCE.md
 echo "Skills:  $(ls .claude/skills | tr '\n' ' ')"
 echo "Agent:   ailc-gate-reviewer"
 echo "Rules:   .claude/settings.json (no reading solutions/, no editing lab/samples/)"
-echo "Starter: work/salesorder-to-orderudm.vm"
+echo "Starter: work/salesorder-to-orderudm.vm, work/EVIDENCE.md"
 uv run -q --with airspeed --with pyyaml python .claude/skills/parity-check/scripts/parity_check.py selftest

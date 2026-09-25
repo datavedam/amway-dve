@@ -32,7 +32,8 @@ document that explains the old value → fix the mapping → run again. Stop at
 
 ## Rules
 - **Never edit the recording or the input samples** to make parity pass.
-- **Never add a data field to the allowed list** to make parity pass. Allowed
+- **Never add a data field to the allowed list** to make parity pass — unless the
+  change request requires that change; then a named person signs it. Otherwise allowed
   differences are structure/metadata only, and a person signs each one.
 - Unknown rule? Mark it OPEN and ask — don't guess from the sample values.
 - Paste the final `PARITY PASS` line into EVIDENCE.md.

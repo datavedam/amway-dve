@@ -18,7 +18,7 @@ Rules:
   - Stage 8 Change (brownfield):
     - an impact list exists and names every consumer of the source topic and of the output, with sources; unknowns are OPEN
     - a frozen contract (the output fields the consumer relies on) is written down and signed
-    - `parity-check/scripts/parity_check.py run` prints PARITY PASS; every allowed difference has a reason and a named approver, and none of them is a data field
+    - `parity-check/scripts/parity_check.py run` prints PARITY PASS; every allowed difference has a reason and a named approver (no placeholder), and none of them is a data field unless the change request requires that change
     - the ADR names the switchover option and the rollback
     - the new flow uses a NEW consumer group; the old flow's group and the old flow itself are untouched
 - Quote the actual command and its output. No output, no verdict.
