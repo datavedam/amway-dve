@@ -31,6 +31,7 @@ Everything is in this `day5/` folder. You never run these by hand - Claude does.
 | `skills/parity-check/reference/allowed-differences.example.yaml` | Template for signing an allowed difference: field, reason, approver (Round 5) |
 | `agents/ailc-gate-reviewer.md` | The gate reviewer subagent: read-only, checks the evidence, reports PASS / FAIL / OPEN, never approves (Round 6) |
 | `lab-settings.json` | Deny rules: Claude can't read `solutions/` or `lab/samples/generate.py`, or edit `lab/samples/` |
+| `work/adr-switchover.md` | Your switchover decision (Round 2b): options, recommendation, consumer group, rollback |
 | `work/EVIDENCE.md` | Your evidence log: one row per round |
 
 ---
@@ -88,6 +89,26 @@ check **FAILs** all three names on purpose: the diagrams use real environment na
 instead of `{env}`, and `prod`/`pd`, `affiliate`/`aff` disagree - open questions for
 your Kafka owners.
 
+## Round 2b - Design: how do we switch over?
+> Write work/adr-switchover.md as an architecture decision record for moving I1001
+> from I3343 to I3343K. Compare three options: switch everything at once; run I3343 and
+> I3343K side by side and compare with parity before I1001 moves; move one market at a
+> time. Recommend one. Cover: I3343K's new consumer group and where it starts reading
+> (latest vs an agreed offset), what happens to orders in flight during the switch, and
+> the rollback (I1001 goes back to the old path; the old consumer group was never
+> touched). Mark anything the lab material doesn't tell you as OPEN. End with an empty
+> line "Decided by:" for a person to fill in. Add a row to work/EVIDENCE.md.
+
+Then **you** fill in the `Decided by:` line with your name. The agent recommends; a
+person decides.
+
+**You should see:** three options compared, one recommended (usually *run side by side
+and compare*), the new consumer group and its start point, in-flight orders, and the
+rollback - with anything the material doesn't say marked OPEN (e.g. how long to run
+side by side, who approves the switch).
+**What it means:** this is the Design stage - the decision is written down before
+anyone builds or switches, and a named person owns it.
+
 ## Round 3 - Build the new mapping
 > Use the parity-check skill. Finish work/salesorder-to-orderudm.vm from
 > lab/nextgen-salesorder-fields.md and lab/change-request-i3343k.md. Keep the Velocity
@@ -136,25 +157,27 @@ A placeholder or no name makes it fail.
 
 ## Round 6 - The gate
 > Use the ailc-gate-reviewer subagent on work/ for stage 8: impact list, frozen
-> contract and parity. The ADR and the new consumer group are not part of today's
-> lab: report them OPEN.
+> contract, the switchover ADR (work/adr-switchover.md, including the new consumer
+> group) and parity.
 
 *`ailc-gate-reviewer` is a read-only subagent: it checks your `work/` files and reports PASS / FAIL / OPEN for each item.*
 
 **You should see:** Parity **PASS**; the allowed difference **OPEN** (until the I1001
-owner confirms); ADR and new consumer group **OPEN**; impact list and frozen contract
-PASS or OPEN; plus a Notes list of other gaps. The reviewer reports - it never approves.
+owner confirms); the switchover ADR **PASS** if it's signed (**FAIL** if `Decided by:` is
+empty); the new consumer group **OPEN** (its name and start point are still to be
+agreed); impact list and frozen contract PASS or OPEN;
+plus a Notes list of other gaps. The reviewer reports - it never approves.
 
 ---
 
 ## What you leave with
-Your `work/` folder: the impact list, the signed frozen contract, the new mapping,
+Your `work/` folder: the impact list, the signed frozen contract, the signed switchover ADR, the new mapping,
 **parity PASS 6/6 with one signed difference**, and the gate's verdict with its OPEN
 list - proof that I1001 won't notice, and exactly what's still open and who closes it.
 
 **The method, for any change to a running flow** (this one, or a webMethods → Camel
-move): find who depends on it → freeze what they receive → build the change → prove it
-with parity → a person signs each intended difference.
+move): find who depends on it → freeze what they receive → decide how to switch → build the
+change → prove it with parity → a person signs each intended difference.
 
 ## Show-back
 1. Which difference would you have missed without parity (yours, or the naive draft's)?
