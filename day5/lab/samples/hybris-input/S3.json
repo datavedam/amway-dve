@@ -1,0 +1,15 @@
+{
+  "orderCode": "SO-TH-100002",
+  "affiliate": "TH",
+  "aboNumber": "7009911",
+  "placedDate": "2026-09-21T02:16:05Z",
+  "currencyIso": "THB",
+  "entries": [
+    {
+      "entryNumber": 0,
+      "productCode": "130777",
+      "quantity": 4,
+      "basePrice": "75.00"
+    }
+  ]
+}

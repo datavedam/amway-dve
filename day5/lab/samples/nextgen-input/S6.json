@@ -1,0 +1,36 @@
+{
+  "order": {
+    "id": "SO-TH-100003",
+    "createdAt": "2026-09-22T23:55:10Z",
+    "submittedAt": "2026-09-23T00:03:02Z",
+    "currency": "THB"
+  },
+  "affiliateCode": "TH",
+  "customer": {
+    "id": "c1f0a2e4-0006",
+    "aboId": "7001234"
+  },
+  "items": [
+    {
+      "sku": "150001",
+      "qty": 1,
+      "price": "990.00",
+      "status": "CANCELLED"
+    },
+    {
+      "sku": "150002",
+      "qty": 1,
+      "price": "1234.50",
+      "status": "ACTIVE"
+    },
+    {
+      "sku": "110001",
+      "qty": 6,
+      "price": "450.00",
+      "status": "ACTIVE"
+    }
+  ],
+  "promotion": {
+    "code": "FEST10"
+  }
+}

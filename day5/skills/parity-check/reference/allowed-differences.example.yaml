@@ -1,0 +1,7 @@
+# Copy next to your mapping (Day 5 lab: work/allowed-differences.yaml; Day 4 lab: work/i3343k/allowed-differences.yaml) and fill in.
+# Every entry needs: path, reason, approved_by (a person's name — not a team, not OPEN, not a <placeholder>).
+# Paths: sourceSystem, lines[*].note, meta.* ...
+allowed:
+  - path: sourceSystem
+    reason: "<why this difference is allowed (e.g. the change request requires it); if nobody has confirmed whether I1001 uses it, say that is OPEN>"
+    approved_by: "<principal's name>"

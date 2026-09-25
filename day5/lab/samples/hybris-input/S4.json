@@ -1,0 +1,22 @@
+{
+  "orderCode": "SO-VN-300310",
+  "affiliate": "VN",
+  "aboNumber": "9300310",
+  "placedDate": "2026-09-21T06:07:19Z",
+  "currencyIso": "VND",
+  "entries": [
+    {
+      "entryNumber": 0,
+      "productCode": "140010",
+      "quantity": 1,
+      "basePrice": "250000.00"
+    },
+    {
+      "entryNumber": 1,
+      "productCode": "140012",
+      "quantity": 1,
+      "basePrice": "45000.00"
+    }
+  ],
+  "voucherCode": "MID-SEPT"
+}

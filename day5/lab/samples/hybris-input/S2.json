@@ -1,0 +1,28 @@
+{
+  "orderCode": "SO-MY-200045",
+  "affiliate": "MY",
+  "aboNumber": "8104455",
+  "placedDate": "2026-09-20T11:41:30Z",
+  "currencyIso": "MYR",
+  "entries": [
+    {
+      "entryNumber": 0,
+      "productCode": "120450",
+      "quantity": 1,
+      "basePrice": "89.90"
+    },
+    {
+      "entryNumber": 1,
+      "productCode": "120451",
+      "quantity": 3,
+      "basePrice": "12.50"
+    },
+    {
+      "entryNumber": 2,
+      "productCode": "110001",
+      "quantity": 1,
+      "basePrice": "450.00"
+    }
+  ],
+  "voucherCode": "NEWABO"
+}

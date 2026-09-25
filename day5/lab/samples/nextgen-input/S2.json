@@ -1,0 +1,36 @@
+{
+  "order": {
+    "id": "SO-MY-200045",
+    "createdAt": "2026-09-20T11:40:03Z",
+    "submittedAt": "2026-09-20T11:41:30Z",
+    "currency": "MYR"
+  },
+  "affiliateCode": "MY",
+  "customer": {
+    "id": "c1f0a2e4-0002",
+    "aboId": "8104455"
+  },
+  "items": [
+    {
+      "sku": "120450",
+      "qty": 1,
+      "price": "89.90",
+      "status": "ACTIVE"
+    },
+    {
+      "sku": "120451",
+      "qty": 3,
+      "price": "12.50",
+      "status": "ACTIVE"
+    },
+    {
+      "sku": "110001",
+      "qty": 1,
+      "price": "450.00",
+      "status": "ACTIVE"
+    }
+  ],
+  "promotion": {
+    "code": "NEWABO"
+  }
+}

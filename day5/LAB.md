@@ -7,7 +7,7 @@ a person signs off on that one difference.
 Everything happens **inside Claude**. You paste one prompt per round; Claude reads the
 files, writes the outputs and runs the checks.
 
-> Everything in `day4/lab/` is **made-up training data** shaped like your flow
+> Everything in `lab/` is **made-up training data** shaped like your flow
 > (orders, old mapping rules, change request) — not real Amway data.
 
 ---
@@ -15,18 +15,18 @@ files, writes the outputs and runs the checks.
 ## Start (the only thing you type outside Claude)
 Open a terminal (Git Bash on Windows) and start Claude in the lab folder:
 ```
-cd training/repo/amway-dve/day4
+cd training/repo/amway-dve/day5
 claude
 ```
-(If `day4` doesn't exist yet, start `claude` in `training/repo/amway-dve` — the setup prompt pulls it.)
+(If `day5` doesn't exist yet, start `claude` in `training/repo/amway-dve` — the setup prompt pulls it.)
 
 ## Round 0 — Set up
-> Run git stash and git pull in this repo. Then, from the day4 folder, run
-> bash ../day5/setup.sh and tell me whether it ended with "selftest PASS".
+> Run git stash and git pull in this repo. Then, from the day5 folder, run
+> bash setup.sh and tell me whether it ended with "selftest PASS".
 > If it failed, tell me why and fix it.
 
 **Then restart Claude once** so it loads the new skills and reviewer: type `/exit`,
-make sure you're in `amway-dve/day4`, and run `claude` again.
+make sure you're in `amway-dve/day5`, and run `claude` again.
 
 **You should see:** `selftest PASS`. If Claude says it can't download packages
 (network/proxy), pair up with a neighbour.
@@ -72,7 +72,7 @@ It looks right — but looking right isn't proof.
 
 ## Round 4 — Prove it with parity
 > Run parity on work/salesorder-to-orderudm.vm against lab/samples and show me every
-> difference. Then run parity on ../day5/demo/naive-draft.vm and explain each
+> difference. Then run parity on demo/naive-draft.vm and explain each
 > difference and what I1001 would get wrong. Add a row to work/EVIDENCE.md.
 
 **You should see:**

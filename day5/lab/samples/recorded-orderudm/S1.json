@@ -1,0 +1,17 @@
+{
+  "orderId": "SO-TH-100001",
+  "affiliate": "TH",
+  "distributorId": "7001234",
+  "orderDate": "2026-09-20T10:02:41Z",
+  "currency": "THB",
+  "promotionCode": "FEST10",
+  "sourceSystem": "HYBRIS",
+  "lines": [
+    {
+      "lineNo": 1,
+      "itemCode": "110001",
+      "quantity": 2,
+      "unitPrice": "450.00"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "orderCode": "SO-TH-100003",
+  "affiliate": "TH",
+  "aboNumber": "7001234",
+  "placedDate": "2026-09-23T00:03:02Z",
+  "currencyIso": "THB",
+  "entries": [
+    {
+      "entryNumber": 0,
+      "productCode": "150002",
+      "quantity": 1,
+      "basePrice": "1234.50"
+    },
+    {
+      "entryNumber": 1,
+      "productCode": "110001",
+      "quantity": 6,
+      "basePrice": "450.00"
+    }
+  ],
+  "voucherCode": "FEST10"
+}

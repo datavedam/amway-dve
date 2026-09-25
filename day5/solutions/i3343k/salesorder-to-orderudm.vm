@@ -1,0 +1,33 @@
+## I3343K mapping: NextGen Commerce salesorder -> OrderUDM.   REFERENCE SOLUTION (training).
+## Lives under mounts/; add to bundle.yaml `mounts:`; route calls velocity:file:mounts/salesorder-to-orderudm.vm
+## Rule: the structure of the input changed (Hybris -> NextGen). The OrderUDM data must not.
+#set($out = {})
+#set($ignore = $out.put("orderId",       $body.order.id))
+#set($ignore = $out.put("affiliate",     $body.affiliateCode))
+## customer.id is NextGen's internal id; the ABO number is customer.aboId
+#set($ignore = $out.put("distributorId", $body.customer.aboId))
+## the old flow used the time the order was placed = submittedAt, not createdAt
+#set($ignore = $out.put("orderDate",     $body.order.submittedAt))
+#set($ignore = $out.put("currency",      $body.order.currency))
+## old flow sent "" when there was no voucher; NextGen may omit promotion or send code: null
+#set($promo = "")
+#if($body.promotion && $body.promotion.code)#set($promo = $body.promotion.code)#end
+#set($ignore = $out.put("promotionCode", $promo))
+## the one allowed difference: see allowed-differences.yaml
+#set($ignore = $out.put("sourceSystem",  "NGC"))
+## Hybris never sent cancelled lines, so skip them and number the rest from 1
+#set($lines = [])
+#set($n = 0)
+#foreach($item in $body.items)
+#if($item.status != "CANCELLED")
+#set($n = $n + 1)
+#set($line = {})
+#set($ignore = $line.put("lineNo",    $n))
+#set($ignore = $line.put("itemCode",  $item.sku))
+#set($ignore = $line.put("quantity",  $item.qty))
+#set($ignore = $line.put("unitPrice", $item.price))
+#set($ignore = $lines.add($line))
+#end
+#end
+#set($ignore = $out.put("lines", $lines))
+$out

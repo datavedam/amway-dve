@@ -1,0 +1,17 @@
+{
+  "orderId": "SO-TH-100002",
+  "affiliate": "TH",
+  "distributorId": "7009911",
+  "orderDate": "2026-09-21T02:16:05Z",
+  "currency": "THB",
+  "promotionCode": "",
+  "sourceSystem": "HYBRIS",
+  "lines": [
+    {
+      "lineNo": 1,
+      "itemCode": "130777",
+      "quantity": 4,
+      "unitPrice": "75.00"
+    }
+  ]
+}
